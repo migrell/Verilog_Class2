@@ -8,18 +8,21 @@ module top_counter_up_down (
     output [7:0] fndFont
 );
     wire [13:0] fndData;
+    wire [3:0] fndDot;
 
     counter_up_down U_Counter (
         .clk  (clk),
         .reset(reset),
         .mode (mode),
-        .count(fndData)
+        .count(fndData),
+        .dot_data(fndDot)
     );
 
     fndController U_FndController (
         .clk(clk),
         .reset(reset),
         .fndData(fndData),
+        .fndDot(fndDot),
         .fndCom(fndCom),
         .fndFont(fndFont)
     );
@@ -29,7 +32,8 @@ module counter_up_down (
     input         clk,
     input         reset,
     input         mode,
-    output [13:0] count
+    output [13:0] count,
+    output  [3:0] dot_data
 );
     wire tick;
 
@@ -45,6 +49,11 @@ module counter_up_down (
         .tick (tick),
         .mode (mode),
         .count(count)
+    );
+
+    comp_dot U_comp_dot(
+    .count(count),
+    .dot_data(dot_data)
     );
 
 endmodule
@@ -107,4 +116,11 @@ module clk_div_10hz (
             end
         end
     end
+endmodule
+
+module comp_dot (
+    input [13:0] count,
+    output [3:0] dot_data
+);
+    assign dot_data = ((count%10) < 5) ? 4'b1101 : 4'b1111;
 endmodule
