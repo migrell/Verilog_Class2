@@ -18,3 +18,8 @@ close [ open C:/Users/kccistc/Desktop/Verilog_Re/project_1/project_1.srcs/source
 add_files C:/Users/kccistc/Desktop/Verilog_Re/project_1/project_1.srcs/sources_1/new/counter_up_doown.v
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
