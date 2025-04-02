@@ -1,0 +1,86 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 15112
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Thu Apr 03 05:07:59 KST 2025
+Time zone: 	Korean Standard Time (Asia/Seoul)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 14
+
+Screen size: 1920x1080
+Screen resolution (DPI): 125
+Available screens: 1
+Default font: family=Segoe UI,name=Segoe UI,style=plain,size=15
+Scale size: 19
+
+Java version: 	11.0.2 64-bit
+Java home: 	C:/migtell/Vivado/2020.2/tps/win64/jre11.0.2
+Java executable location: 	C:/migtell/Vivado/2020.2/tps/win64/jre11.0.2/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	parkj
+User home directory: C:/Users/parkj
+User working directory: C:/Users/parkj/Desktop/Verilog_Class2/250402
+User country: 	KR
+User language: 	ko
+User locale: 	ko_KR
+
+RDI_BASEROOT: C:/migtell/Vivado
+HDI_APPROOT: C:/migtell/Vivado/2020.2
+RDI_DATADIR: C:/migtell/Vivado/2020.2/data
+RDI_BINDIR: C:/migtell/Vivado/2020.2/bin
+
+Vivado preferences file location: C:/Users/parkj/AppData/Roaming/Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: C:/Users/parkj/AppData/Roaming/Xilinx/Vivado/2020.2/
+Vivado layouts directory: C:/Users/parkj/AppData/Roaming/Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	C:/migtell/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/parkj/Desktop/Verilog_Class2/250402/vivado.log
+Vivado journal file location: 	C:/Users/parkj/Desktop/Verilog_Class2/250402/vivado.jou
+Engine tmp dir: 	C:/Users/parkj/Desktop/Verilog_Class2/250402/.Xil/Vivado-15112-parkjiho
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/migtell/Vivado/2020.2/ids_lite/ISE
+XILINX_DSP: C:/migtell/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: C:/migtell/Vitis_HLS/2020.2
+XILINX_PLANAHEAD: C:/migtell/Vivado/2020.2
+XILINX_SDK: C:/migtell/Vitis/2020.2
+XILINX_VITIS: C:/migtell/Vitis/2020.2
+XILINX_VIVADO: C:/migtell/Vivado/2020.2
+XILINX_VIVADO_HLS: C:/migtell/Vivado/2020.2
+
+
+GUI allocated memory:	129 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,066 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bz (cr):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\parkj\Desktop\Verilog_Class2\250402\project_1.xpr. Version: Vivado v2020.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project C:/Users/parkj/Desktop/Verilog_Class2/250402/project_1.xpr 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILESET_TARGET_UCF_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: FILESET_TARGET_UCF_CHANGE

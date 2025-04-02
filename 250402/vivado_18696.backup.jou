@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr  2 22:30:12 2025
+# Process ID: 18696
+# Current directory: C:/Users/parkj/Desktop/Verilog_Class2/250402
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8056 C:\Users\parkj\Desktop\Verilog_Class2\250402\project_1.xpr
+# Log file: C:/Users/parkj/Desktop/Verilog_Class2/250402/vivado.log
+# Journal file: C:/Users/parkj/Desktop/Verilog_Class2/250402\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/parkj/Desktop/Verilog_Class2/250402/project_1.xpr
+update_compile_order -fileset sources_1

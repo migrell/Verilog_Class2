@@ -1,0 +1,61 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr  2 18:14:20 2025
+# Process ID: 7920
+# Current directory: C:/Users/parkj/Desktop/Verilog_Class2/250402
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11252 C:\Users\parkj\Desktop\Verilog_Class2\250402\project_1.xpr
+# Log file: C:/Users/parkj/Desktop/Verilog_Class2/250402/vivado.log
+# Journal file: C:/Users/parkj/Desktop/Verilog_Class2/250402\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/parkj/Desktop/Verilog_Class2/250402/project_1.xpr
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/XDC/Basys-3-Master.xdc] -no_script -reset -force -quiet
+remove_files  -fileset constrs_1 D:/XDC/Basys-3-Master.xdc
+add_files -fileset constrs_1 -norecurse C:/verilog/Basys-3-Master.xdc
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+refresh_design
+set_property IOSTANDARD LVCMOS33 [get_ports [list reset]]
+refresh_design
+set_property IOSTANDARD LVTTL [get_ports [list {fndFont[0]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[0]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[1]}]]
+set_property IOSTANDARD LVTTL [get_ports [list {fndFont[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[3]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[4]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[5]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[6]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndFont[7]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndDot[0]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndDot[1]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndDot[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndDot[3]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[0]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[1]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[3]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[4]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[5]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[6]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[7]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[8]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[9]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[10]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[11]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[12]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndData[13]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndCom[0]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndCom[1]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndCom[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {fndCom[3]}]]
+refresh_design
+export_ip_user_files -of_objects  [get_files C:/verilog/Basys-3-Master.xdc] -no_script -reset -force -quiet
+remove_files  -fileset constrs_1 C:/verilog/Basys-3-Master.xdc
+add_files -fileset constrs_1 -norecurse C:/verilog/Basys-3-Master.xdc
