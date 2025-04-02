@@ -103,10 +103,10 @@ module uart_tx_simple(
     input reset,
     input tick,
     input start_trigger,
-    input [7:0] data_in,
+    input [15:0] data_in,
     output reg o_tx_done,
     output reg o_tx,
-    output [1:0] state_out
+    output [15:0] state_out
 );
     // FSM 상태 정의 - 패리티 없는 단순 8N1 형식
     parameter IDLE = 2'b00;
@@ -115,8 +115,8 @@ module uart_tx_simple(
     parameter STOP = 2'b11;
     
     reg [1:0] state;
-    reg [2:0] bit_idx; // 비트 인덱스 (0-7)
-    reg [7:0] data_reg; // 전송 데이터 레지스터
+    reg [7:0] bit_idx; // 비트 인덱스 (0-7)
+    reg [10:0] data_reg; // 전송 데이터 레지스터
     
     assign state_out = state;
     
@@ -177,11 +177,11 @@ endmodule
 module uart_simple(
     input clk,
     input reset,
-    input [7:0] tx_data_in,
+    input [16:0] tx_data_in,
     input btn_start,
     output o_tx_done,
     output o_tx,
-    output [1:0] state_out
+    output [17:0] state_out
 );
     wire baud_tick;
     
