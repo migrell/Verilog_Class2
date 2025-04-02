@@ -1848,3 +1848,4 @@ Finished Parsing XDC File [C:/verilog/Basys-3-Master.xdc]
 Completed Processing XDC Constraints
 
 refresh_design: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 3731.273 ; gain = 1.527
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210183B9AD18A
