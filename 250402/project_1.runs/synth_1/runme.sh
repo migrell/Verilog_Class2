@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/kccistc/Desktop/Verilog_Re/project_1/project_1.runs/synth_1'
+HD_PWD='C:/Users/kccistc/Desktop/Verilog_Class2/250402/project_1.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log top_counter_up_down.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_counter_up_down.tcl
+EAStep vivado -log top_uart_counter.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_uart_counter.tcl

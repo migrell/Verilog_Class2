@@ -1,0 +1,11 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr  2 16:41:39 2025
+# Process ID: 2292
+# Current directory: C:/Users/kccistc/Desktop/Verilog_Class2/250402/project_1.runs/synth_1
+# Command line: vivado.exe -log top_uart_counter.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_uart_counter.tcl
+# Log file: C:/Users/kccistc/Desktop/Verilog_Class2/250402/project_1.runs/synth_1/top_uart_counter.vds
+# Journal file: C:/Users/kccistc/Desktop/Verilog_Class2/250402/project_1.runs/synth_1\vivado.jou
+#-----------------------------------------------------------

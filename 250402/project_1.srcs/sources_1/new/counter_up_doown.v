@@ -1,16 +1,111 @@
 `timescale 1ns / 1ps
 
-module top_counter_up_down (
+module top_uart_counter (
     input        clk,
     input        reset,
-    input        mode,
-    input  [2:0] sw,
+    input        rx,         // UART 수신 신호
+    output       tx,         // UART 송신 신호
     output [3:0] fndCom,
     output [7:0] fndFont
 );
+    // 내부 신호
     wire [13:0] fndData;
     wire [3:0] fndDot;
     
+    // 가상 스위치 신호 (UART로부터 생성)
+    reg [2:0] virtual_sw;
+    reg mode;  // reg로 선언
+    
+    // UART 수신 신호
+    wire rx_done;
+    wire [7:0] rx_data;
+    
+    // UART 송신 신호
+    wire [7:0] tx_data;
+    wire tx_start;
+    wire tx_done;
+    wire [1:0] tx_state;
+    
+    // 디바운스 카운터 - 명령 안정화를 위한 타이머
+    reg [19:0] debounce_counter;
+    wire debounce_tick;
+    
+    // 디바운스 타이머 (약 1ms)
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            debounce_counter <= 0;
+        end else begin
+            debounce_counter <= debounce_counter + 1;
+        end
+    end
+    
+    // 디바운스 틱 신호 (1ms마다 생성)
+    assign debounce_tick = (debounce_counter == 20'd0);
+    
+    // UART 수신 모듈 - 단순화된 버전 사용
+    uart_rx_simple U_UART_RX(
+        .clk(clk),
+        .reset(reset),
+        .rx(rx),
+        .rx_done(rx_done),
+        .rx_data(rx_data)
+    );
+    
+    // UART 송신 모듈 - 단순화된 버전 사용
+    uart_simple U_UART(
+        .clk(clk),
+        .reset(reset),
+        .tx_data_in(tx_data),
+        .btn_start(tx_start),
+        .o_tx_done(tx_done),
+        .o_tx(tx),
+        .state_out(tx_state)
+    );
+    
+    // 명령 래치
+    reg cmd_received;
+    reg [7:0] cmd_buffer;
+    
+    // 명령 수신 및 래치
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            cmd_received <= 0;
+            cmd_buffer <= 0;
+            virtual_sw <= 3'b000; // 스위치 초기화 추가
+            mode <= 0;            // 모드 초기화 추가
+        end else begin
+            if (rx_done) begin
+                cmd_received <= 1;
+                cmd_buffer <= rx_data;
+            end else if (debounce_tick && cmd_received) begin
+                // 디바운스 처리 후 명령 실행
+                case (cmd_buffer)
+                    8'h72, 8'h52: begin // 'r', 'R' - Run
+                        virtual_sw[1] <= 1'b1; // sw[1] = run_stop
+                    end
+                    8'h73, 8'h53: begin // 's', 'S' - Stop
+                        virtual_sw[1] <= 1'b0; // sw[1] = run_stop
+                    end
+                    8'h63, 8'h43: begin // 'c', 'C' - Clear
+                        virtual_sw[2] <= 1'b1; // sw[2] = clear
+                    end
+                    8'h6D, 8'h4D: begin // 'm', 'M' - Mode
+                        mode <= ~mode; // mode 토글
+                        virtual_sw[0] <= ~virtual_sw[0]; // sw[0] = mode toggle
+                    end
+                    default: ;
+                endcase
+                cmd_received <= 0;
+            end
+            
+            // 클리어 버튼은 원샷으로 동작
+            if (virtual_sw[2] && debounce_tick) begin
+                virtual_sw[2] <= 1'b0;
+            end
+        end
+    end
+    
+    // 기존 cu 모듈과 카운터 연결
     wire sw_mode;
     wire run_stop_mode;
     wire clear_mode;
@@ -20,7 +115,7 @@ module top_counter_up_down (
     cu U_CU(
         .clk(clk),
         .reset(reset),
-        .sw(sw),
+        .sw(virtual_sw),        // UART로부터 생성된 가상 스위치 입력
         .current_state(current_state),
         .sw_mode(sw_mode),
         .run_stop_mode(run_stop_mode),
@@ -30,7 +125,7 @@ module top_counter_up_down (
     counter_up_down U_Counter (
         .clk(clk),
         .reset(reset),
-        .mode(mode),
+        .mode(mode),            // 직접 mode를 연결
         .run_stop(run_stop_mode),
         .en(1'b1),
         .clear(clear_mode),
@@ -38,7 +133,18 @@ module top_counter_up_down (
         .dot_data(fndDot)
     );
     
-    // fndController 인터페이스 수정
+    // 송신 응답 모듈 - 단순화된 버전
+    uart_response_simple U_UART_RESPONSE(
+        .clk(clk),
+        .reset(reset),
+        .rx_done(rx_done),
+        .rx_data(rx_data),
+        .tx_done(tx_done),
+        .tx_data(tx_data),
+        .tx_start(tx_start)
+    );
+    
+    // fndController 인스턴스
     fndController U_FndController (
         .clk(clk),
         .reset(reset),
@@ -47,6 +153,94 @@ module top_counter_up_down (
         .fndFont(fndFont)
     );
 endmodule
+
+// 단순화된 응답 모듈
+module uart_response_simple(
+    input clk,
+    input reset,
+    input rx_done,
+    input [7:0] rx_data,
+    input tx_done,
+    output reg [7:0] tx_data,
+    output reg tx_start
+);
+    // 상태 정의
+    parameter IDLE = 2'b00;
+    parameter PREPARE = 2'b01;
+    parameter SEND = 2'b10;
+    parameter WAIT = 2'b11;
+    
+    reg [1:0] state;
+    reg send_pending; // 전송 대기 중 플래그
+    reg [7:0] pending_data; // 대기 중인 데이터
+    
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            state <= IDLE;
+            tx_start <= 0;
+            tx_data <= 0;
+            send_pending <= 0;
+            pending_data <= 0;
+        end else begin
+            case (state)
+                IDLE: begin
+                    tx_start <= 0;
+                    
+                    // 새 명령이 수신되었거나 대기 중인 전송이 있는 경우
+                    if (rx_done || send_pending) begin
+                        state <= PREPARE;
+                        if (rx_done) begin
+                            // 수신 데이터에 따라 응답 메시지 설정
+                            case (rx_data)
+                                8'h72, 8'h52: tx_data <= 8'h52; // 'R' (Run)
+                                8'h73, 8'h53: tx_data <= 8'h53; // 'S' (Stop)
+                                8'h63, 8'h43: tx_data <= 8'h43; // 'C' (Clear)
+                                8'h6D, 8'h4D: tx_data <= 8'h4D; // 'M' (Mode)
+                                default: tx_data <= 8'h3F;      // '?' (Unknown)
+                            endcase
+                            send_pending <= 0; // 새 명령을 직접 처리
+                        end else begin
+                            // 대기 중인 명령 처리
+                            tx_data <= pending_data;
+                            send_pending <= 0;
+                        end
+                    end
+                end
+                
+                PREPARE: begin
+                    state <= SEND;
+                end
+                
+                SEND: begin
+                    tx_start <= 1;
+                    state <= WAIT;
+                end
+                
+                WAIT: begin
+                    tx_start <= 0;
+                    
+                    if (tx_done) begin
+                        state <= IDLE;
+                    end
+                    
+                    // 대기 중 새 명령이 왔을 때
+                    if (rx_done) begin
+                        // 현재 전송이 완료될 때까지 대기하고, 새 명령을 저장
+                        case (rx_data)
+                            8'h72, 8'h52: pending_data <= 8'h52; // 'R' (Run)
+                            8'h73, 8'h53: pending_data <= 8'h53; // 'S' (Stop)
+                            8'h63, 8'h43: pending_data <= 8'h43; // 'C' (Clear)
+                            8'h6D, 8'h4D: pending_data <= 8'h4D; // 'M' (Mode)
+                            default: pending_data <= 8'h3F;      // '?' (Unknown)
+                        endcase
+                        send_pending <= 1;
+                    end
+                end
+            endcase
+        end
+    end
+endmodule
+
 
 module counter_up_down (
     input         clk,

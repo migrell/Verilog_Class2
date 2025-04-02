@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1743570187">
-  <File Type="PA-TCL" Name="top_counter_up_down.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="top_counter_up_down_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="top_counter_up_down_reports.tcl"/>
-  <File Type="RDS-RDS" Name="top_counter_up_down.vds"/>
-  <File Type="RDS-UTIL" Name="top_counter_up_down_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="top_counter_up_down_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="top_counter_up_down.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="top_counter_up_down_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="top_counter_up_down_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1743579697">
+  <File Type="PA-TCL" Name="top_uart_counter.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="top_uart_counter_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="top_uart_counter_reports.tcl"/>
+  <File Type="RDS-RDS" Name="top_uart_counter.vds"/>
+  <File Type="RDS-UTIL" Name="top_uart_counter_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="top_uart_counter_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="top_uart_counter.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="top_uart_counter_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="top_uart_counter_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/fnd.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/uart.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -27,7 +34,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="top_counter_up_down"/>
+      <Option Name="TopModule" Val="top_uart_counter"/>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
@@ -40,6 +47,7 @@
       </FileInfo>
     </File>
     <Config>
+      <Option Name="TargetConstrsFile" Val="D:/XDC/Basys-3-Master.xdc"/>
       <Option Name="ConstrsType" Val="XDC"/>
     </Config>
   </FileSet>

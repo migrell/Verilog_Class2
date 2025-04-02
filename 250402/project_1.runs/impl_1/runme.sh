@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/kccistc/Desktop/Verilog_Re/project_1/project_1.runs/impl_1'
+HD_PWD='C:/Users/kccistc/Desktop/Verilog_Class2/250402/project_1.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -42,6 +42,6 @@ EAStep()
 
 # pre-commands:
 /bin/touch .init_design.begin.rst
-EAStep vivado -log top_counter_up_down.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_counter_up_down.tcl -notrace
+EAStep vivado -log top_uart_counter.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_uart_counter.tcl -notrace
 
 
